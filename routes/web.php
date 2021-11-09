@@ -21,6 +21,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get("/todo",function(){
-    return view("pages.todo"); 
-});
+Route::get("/todo",[App\Http\Controllers\TodoController::class,"index"]);
+Route::post("/todo",[App\Http\Controllers\TodoController::class,"tambahTodo"]);
+Route::get("/todo/hapus/{id}",[App\Http\Controllers\TodoController::class,"hapusTodo"]);
+Route::get("/todo/update/{id}",[App\Http\Controllers\TodoController::class,"updateTodo"]);

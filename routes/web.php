@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +22,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get("/todo",[App\Http\Controllers\TodoController::class,"index"]);
-Route::post("/todo",[App\Http\Controllers\TodoController::class,"tambahTodo"]);
-Route::get("/todo/hapus/{id}",[App\Http\Controllers\TodoController::class,"hapusTodo"]);
-Route::get("/todo/update/{id}",[App\Http\Controllers\TodoController::class,"updateTodo"]);
+Route::middleware(['auth'])->group(function () {
+    Route::get("/todo",[TodoController::class,"index"])->name("todo.index");
+    Route::post("/todo",[TodoController::class,"tambahTodo"])->name("todo.tambah");
+    Route::get("/todo/hapus/{id}",[TodoController::class,"hapusTodo"])->name("todo.hapus");
+    Route::get("/todo/update/{id}",[TodoController::class,"updateTodo"])->name("todo.update");
+});
+

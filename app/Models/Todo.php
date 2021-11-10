@@ -10,4 +10,8 @@ class Todo extends Model
     use HasFactory;
 
     protected $table = "tbltodo";
+
+    protected $fillable = [
+        "name","status"
+    ];
 }
